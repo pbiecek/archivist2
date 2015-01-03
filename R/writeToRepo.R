@@ -104,11 +104,13 @@ writeToRepo <- function(artifact, repo = NULL, archiveTags = TRUE,
   if (isRemoteRepo(repo)) {
     writeToRemoteRepo(md5hash, objectName, artifact, allTags, repo, 
                       compress=compress, compression_level=compression_level)
-  } else { # local repo -> directory
+  }
+  if (isLocalRepo(repo)) { # local repo -> directory
     writeToLocalRepo(md5hash, objectName, artifact, allTags, repo, 
                      compress=compress, compression_level=compression_level)
   }
-  
+  if (isGitHubRepo(repo)) 
+      stop("GitHub repos are read-only")
   # 
   return( md5hash )
 }
