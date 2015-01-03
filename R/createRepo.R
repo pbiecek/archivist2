@@ -162,3 +162,8 @@ checkDirectory <- function( directory ){
   }
   return( directory )
 }
+
+isRemoteRepo <- function(repo) {
+  (substr(repo, 1, 7) == "http://") || (substr(repo, 1, 8) == "https://")
+}
+
