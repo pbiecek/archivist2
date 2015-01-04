@@ -120,8 +120,9 @@ writeToRemoteRepo <- function(md5hash, objectName, artifact, allTags, repo, comp
   tmpdir <- tempdir()
   tmpfile <- paste0(tmpdir, "/", md5hash, ".rda")
   save(artifact, file=tmpfile, compress = compress, compression_level = compression_level)
-  
-  result <- POST(repo,
+
+  repoUploadUrl <- paste(endWithSlash(repo), get(".remoteUploadScript", envir = .ArchivistEnv) )
+  result <- POST(repoUploadUrl,
                  body = list(fileToUpload = upload_file(tmpfile),
                              name = objectName,
                              md5hash = md5hash,
@@ -130,7 +131,7 @@ writeToRemoteRepo <- function(md5hash, objectName, artifact, allTags, repo, comp
                              submit = get(".remoteRepoAntiSpam", envir = .ArchivistEnv )))
   unlink(tmpfile)
   result <- rawToChar(result$content)
-  if (result != get( ".confirmation", envir = .ArchivistEnv ))
+  if (result != get( ".remoteConfirmation", envir = .ArchivistEnv ))
     stop(result)
 }
 
