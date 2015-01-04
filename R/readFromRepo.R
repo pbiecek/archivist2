@@ -85,7 +85,6 @@ readFromLocalRepo <- function( md5hash, repo = NULL){
 }
 
 readFromGitHubRepo <- function( md5hash, repo = NULL){
-  # md5hash, repo = NULL, user = NULL, branch = "master", repoGit = FALSE, value = FALSE ){
   # it is assumed that repo for github is:
   # GitHub:user/repo/branch/dir....
   
@@ -105,6 +104,35 @@ readFromGitHubRepo <- function( md5hash, repo = NULL){
   list_values <- lapply(md5hash, function{
     tmpobjectS <- getBinaryURL( paste0( get( x = ".GithubURL", envir = .ArchivistEnv), "/", repoDirGit, 
                           "/gallery/", x, ".rda"), ssl.verifypeer = FALSE )    
+    tmpf <- tempfile()
+    writeBin( tmpobjectS, tmpf )
+    # load
+    .nameEnv <- new.env()
+    nam <- load( file = tmpf, envir = .nameEnv ) 
+    unlink(tmpf)
+    #return
+    get(x = nam, envir = .nameEnv)
+  })
+  
+  list(values=list_values, 
+       names=names)
+}
+
+readFromRemoteRepo <- function( md5hash, repo = NULL){
+  
+  repoUploadUrl <- paste(endWithSlash(repo), get(".remoteQueryScript", envir = .ArchivistEnv) )
+  result <- POST(repoUploadUrl,
+                 body = list(fileToUpload = upload_file(tmpfile),
+                             md5hash = md5hash,
+                             action = "get_paths",
+                             submit = get(".remoteRepoAntiSpam", envir = .ArchivistEnv )))
+
+  TODO: here work with returned list
+  
+  # checking artifacts names and values
+  list_values <- lapply(md5hash, function{
+    tmpobjectS <- getBinaryURL( paste0( get( x = ".GithubURL", envir = .ArchivistEnv), "/", repoDirGit, 
+                                        "/gallery/", x, ".rda"), ssl.verifypeer = FALSE )    
     tmpf <- tempfile()
     writeBin( tmpobjectS, tmpf )
     # load
