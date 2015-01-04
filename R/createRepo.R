@@ -150,6 +150,16 @@ downloadDB <- function( repo, user, branch, repoDirGit ){
    return( Temp2 )
 }
 
+downloadGitHubDB <- function( repoDirGit ){
+  URLdb <- paste0( get( ".GithubURL", envir = .ArchivistEnv) , repoDirGit, "/backpack.db") 
+
+  db <- getBinaryURL( URLdb, ssl.verifypeer = FALSE )
+  Temp2 <- tempfile()
+  file.create( Temp2 )
+  writeBin( db, Temp2 )
+  return( Temp2 )
+}
+
 checkDirectory <- function( directory ){
   # check if global repository was specified by setLocalRepo
   if ( is.null(directory) ){
@@ -174,3 +184,10 @@ isGitHubRepo <- function(repo) {
 isLocalRepo <- function(repo) {
   (!isRemoteRepo(repo)) & (!isGitHubRepo(repo))
 }
+
+endWithSlash <- function( directory ){
+  if ( !grepl("/$", x = directory , perl=TRUE) ) 
+    directory <- paste0(  directory, "/"  )
+  return( directory )
+}
+
