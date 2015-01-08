@@ -9,6 +9,7 @@
   assign( x = ".remoteRepoAntiSpam", value = "787878", envir = .ArchivistEnv )
   assign( x = ".remoteConfirmation", value = "File uploaded. Database updated. ", envir = .ArchivistEnv )
   assign( x = ".remoteUploadScript", value = "archivist2_upload.php", envir = .ArchivistEnv )
+  assign( x = ".remoteQueryScript", value = "archivist2_query.php", envir = .ArchivistEnv )
 }
 
 .onDetach <- function( libpath ){
