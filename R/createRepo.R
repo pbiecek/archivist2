@@ -38,7 +38,7 @@
 #' @param setAsDefault If \code{setAsDefault = TRUE} newly created repo is set as the default one.
 #' 
 #' @author 
-#' Marcin Kosinski, \email{m.p.kosinski@gmail.com}, Przemyslaw Biecek, \email{przemyslaw.biecek@gmail.com}
+#' Marcin Kosinski, m.p.kosinski_at_gmail.com, Przemyslaw Biecek, przemyslaw.biecek_at_gmail.com
 #'
 #' @examples
 #' \dontrun{

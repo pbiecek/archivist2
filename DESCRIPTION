@@ -32,7 +32,9 @@ Depends:
     RSQLite,
     DBI,
     shiny,
-    lubridate
+    lubridate,
+    archivist,
+    knitr
 Imports:
     RCurl,
     digest,
