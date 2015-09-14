@@ -24,7 +24,7 @@
 #' @param githubDir For github repository it's a github direcotry (by default global).
 #'
 #' @author 
-#' Przemyslaw Biecek, \email{przemyslaw.biecek@gmail.com}
+#' Przemyslaw Biecek, przemyslaw.biecek_at_gmail.com, 
 #' 
 #' @examples
 #' \dontrun{

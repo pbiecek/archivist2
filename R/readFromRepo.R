@@ -34,7 +34,7 @@
 #' or as a single value (if there is only one arfifact that matches md5hash).
 #'
 #' @author 
-#' Przemyslaw Biecek, \email{przemyslaw.biecek@gmail.com}, Marcin Kosinski, \email{m.p.kosinski@gmail.com}
+#' Przemyslaw Biecek, przemyslaw.biecek_at_gmail.com, Marcin Kosinski, m.p.kosinski_at_gmail.com
 #' 
 #' @examples
 #' \dontrun{
@@ -74,7 +74,7 @@ readFromLocalRepo <- function( md5hash, repo = NULL){
   names <- as.character( md5hashList[, 2] )
   
   # using sapply in case abbreviation mode found more than 1 md5hash
-  list_values <- lapply(md5hash, function{
+  list_values <- lapply(md5hash, function(){
     .nameEnv <- new.env()
     nam <- load( file = paste0( repo, "gallery/", md5hash[i], ".rda" ), envir = .nameEnv ) 
     get(x = nam, envir = .nameEnv)
@@ -101,7 +101,7 @@ readFromGitHubRepo <- function( md5hash, repo = NULL){
       
   # load artifacts from Repository
   # returns objects as value
-  list_values <- lapply(md5hash, function{
+  list_values <- lapply(md5hash, function(){
     tmpobjectS <- getBinaryURL( paste0( get( x = ".GithubURL", envir = .ArchivistEnv), "/", repoDirGit, 
                           "/gallery/", x, ".rda"), ssl.verifypeer = FALSE )    
     tmpf <- tempfile()
@@ -127,10 +127,10 @@ readFromRemoteRepo <- function( md5hash, repo = NULL){
                              action = "get_paths",
                              submit = get(".remoteRepoAntiSpam", envir = .ArchivistEnv )))
 
-  TODO: here work with returned list
+  #TODO: here work with returned list
   
   # checking artifacts names and values
-  list_values <- lapply(md5hash, function{
+  list_values <- lapply(md5hash, function(){
     tmpobjectS <- getBinaryURL( paste0( get( x = ".GithubURL", envir = .ArchivistEnv), "/", repoDirGit, 
                                         "/gallery/", x, ".rda"), ssl.verifypeer = FALSE )    
     tmpf <- tempfile()

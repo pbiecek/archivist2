@@ -74,7 +74,7 @@
 #' @param compression_level The level of compression, passed to \code{save()}.
 #' 
 #' @author 
-#' Przemyslaw Biecek, \email{przemyslaw.biecek@gmail.com}, Marcin Kosinski, \email{m.p.kosinski@gmail.com}
+#' Przemyslaw Biecek, przemyslaw.biecek_at_gmail.com, Marcin Kosinski, m.p.kosinski_at_gmail.com
 #'
 #' @examples
 #' # objects preparation
